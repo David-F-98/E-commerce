@@ -3,7 +3,12 @@
 const producto = document.getElementById('producto');
 const productoImagen = producto.querySelector('.producto__imagen');
 const thumbs = producto.querySelector('.producto__thumbs');
+
 const propiedadColor = producto.querySelector('#propiedad-color');
+
+const botonIncrementarCant = producto.querySelector('#incrementar-cantidad');
+const botonDisminuirCant = producto.querySelector('#disminuir-cantidad');
+const inputCantidad = producto.querySelector('#cantidad');
 
 
 thumbs.addEventListener('click', (e)=>{
@@ -15,6 +20,7 @@ thumbs.addEventListener('click', (e)=>{
         productoImagen.src = `./img/tennis/${nombreImagen}`;
         
     }    
+    
 });
 
 propiedadColor.addEventListener('click',(e)=>{
@@ -23,4 +29,17 @@ propiedadColor.addEventListener('click',(e)=>{
         productoImagen.src = `./img/tennis/${imagenSrc}.jpg`;
     }
     
+});
+
+
+
+botonDisminuirCant.addEventListener('click', (e)=>{
+    
+    if (parseInt(inputCantidad.value)>1){
+        inputCantidad.value = parseInt(inputCantidad.value) - 1;
+    }
+});
+
+botonIncrementarCant.addEventListener('click', (e)=>{
+    inputCantidad.value = parseInt(inputCantidad.value) + 1;
 });
