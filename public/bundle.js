@@ -44,12 +44,34 @@ botonIncrementarCant.addEventListener('click', (e)=>{
     inputCantidad.value = parseInt(inputCantidad.value) + 1;
 });
 
+var data = {
+	productos: [
+		{
+			id: '1',
+			nombre: 'Tennis Converse Standard',
+			descripcion: 'Consectetur adipisicing elit.',
+			precio: 500.0,
+			colores: ['negro', 'rojo', 'amarillo'],
+			tamaños: ['1,5', '2', '2,5', '3', '4'],
+		},
+		{
+			id: '2',
+			nombre: 'Tennis Converse 2000',
+			descripcion: 'Consectetur adipisicing elit.',
+			precio: 450.0,
+			colores: ['negro', 'rojo', 'amarillo'],
+			tamaños: ['1,5', '2', '2,5', '3', '4'],
+		},
+	],
+};
+
 const btnAbrirCarrito = document.querySelectorAll('[data-accion="abrir-carrito"]');
 const btnCerrarCarrito = document.querySelectorAll('[data-accion="cerrar-carrito"]');
 const ventanaCarrito = document.getElementById('carrito');
 const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
 const producto = document.getElementById('producto');
 const carrito = [];
+const formatearMoneda = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COL'});
 
 const renderCarrito = () =>{
     ventanaCarrito.classList.add('carrito--active');
@@ -58,6 +80,15 @@ const renderCarrito = () =>{
     productosAnteriores.forEach((producto)=>producto.remove());
 
     carrito.forEach((productoCarrito)=>{
+
+        data.productos.forEach((productoBaseDatos)=>{
+            if(productoBaseDatos.id === productoCarrito.id){
+                productoCarrito.precio = productoBaseDatos.precio;
+
+            }
+        });
+
+
         let thumbSrc = producto.querySelectorAll('.producto__thumb-img')[0].src;
         if(productoCarrito.color === 'rojo'){
             thumbSrc = './img/thumbs/rojo.jpg';
@@ -91,7 +122,7 @@ const renderCarrito = () =>{
                     />
                 </svg>
             </button>
-            <p class="carrito__producto-precio">$500.00</p>
+            <p class="carrito__producto-precio">${formatearMoneda.format(productoCarrito.precio * productoCarrito.cantidad)}</p>
         </div>
         `;
 
