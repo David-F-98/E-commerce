@@ -204,6 +204,7 @@ btnAgregarCarrito.addEventListener('click', (e)=>{
 
 ventanaCarrito.addEventListener('click',(e)=>{
 
+
     const boton = e.target.closest('button');
     if(boton?.dataset?.accion === 'eliminar-item-carrito'){
         const producto = e.target.closest('.carrito__producto');
@@ -215,4 +216,9 @@ ventanaCarrito.addEventListener('click',(e)=>{
         });
         renderCarrito();
     }    
+});
+
+ventanaCarrito.querySelector('#carrito__btn-comprar').addEventListener('click',()=>{
+    console.log('Eviando peticion de compra...');
+    console.log(carrito);
 });
