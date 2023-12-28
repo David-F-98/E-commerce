@@ -6,6 +6,8 @@ const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
 const producto = document.getElementById('producto');
 let carrito = [];
 const formatearMoneda = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COL'});
+const notificacion = document.getElementById('notificacion');
+
 
 const renderCarrito = () =>{
     ventanaCarrito.classList.add('carrito--active');
@@ -122,6 +124,17 @@ btnAgregarCarrito.addEventListener('click', (e)=>{
             tamano:tamano,
         });
     };
+
+    let thumbSrc = producto.querySelectorAll('.producto__thumb-img')[0].src;
+    if(color==='rojo'){
+        thumbSrc = './img/thumbs/rojo.jpg';
+    } else if(color==='amarillo'){
+        thumbSrc = './img/thumbs/amarillo.jpg';
+    }
+
+    notificacion.querySelector('img').src = thumbSrc;
+    notificacion.classList.add('notificacion--active');
+    setTimeout(()=>notificacion.classList.remove('notificacion--active'),3000);
     
 });
 
