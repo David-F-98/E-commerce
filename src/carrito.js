@@ -4,7 +4,7 @@ const btnCerrarCarrito = document.querySelectorAll('[data-accion="cerrar-carrito
 const ventanaCarrito = document.getElementById('carrito');
 const btnAgregarCarrito = document.getElementById('agregar-al-carrito');
 const producto = document.getElementById('producto');
-const carrito = [];
+let carrito = [];
 const formatearMoneda = new Intl.NumberFormat('es-CO',{style:'currency',currency:'COL'});
 
 const renderCarrito = () =>{
@@ -113,4 +113,20 @@ btnAgregarCarrito.addEventListener('click', (e)=>{
         });
     };
     
-})
+});
+
+ventanaCarrito.addEventListener('click',(e)=>{
+
+    const boton = e.target.closest('button');
+    if(boton?.dataset?.accion === 'eliminar-item-carrito'){
+        const producto = e.target.closest('.carrito__producto');
+        const indexProducto = [...ventanaCarrito.querySelectorAll('.carrito__producto')].indexOf(producto);
+        carrito = carrito.filter((item, index)=>{
+            if(index !== indexProducto){
+                return item;
+            }
+        })
+        renderCarrito();
+    };
+    
+});
